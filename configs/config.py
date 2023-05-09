@@ -2,13 +2,13 @@
 Description: 
 Author: colin gao
 Date: 2023-05-08 16:50:54
-LastEditTime: 2023-05-09 15:50:06
+LastEditTime: 2023-05-09 16:19:28
 '''
 import os
 
 STREAMING = False
 
-INGEST = False
+INGEST = True
 
 TEMPERTURE = 0.3
 
