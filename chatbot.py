@@ -4,9 +4,7 @@ Author: colin gao
 Date: 2023-05-05 13:32:05
 LastEditTime: 2023-05-09 16:14:10
 '''
-import os, json
-os.environ["OPENAI_API_KEY"] = "sk-***"
-
+import json
 from colorama import init, Fore, Style
 
 from langchain.document_loaders import TextLoader, DirectoryLoader
