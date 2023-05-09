@@ -11,4 +11,6 @@ faiss-cpu
 bs4
 unstructured
 libmagic
-colorama
+colorama==0.4.6
+pinecone-client==2.2.1
+streamlit==1.22.0
