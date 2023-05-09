@@ -2,13 +2,15 @@
 Description: 
 Author: colin gao
 Date: 2023-05-08 16:50:54
-LastEditTime: 2023-05-09 16:19:28
+LastEditTime: 2023-05-09 18:43:12
 '''
 import os
 
 STREAMING = False
 
 INGEST = True
+
+PINECONE = False
 
 TEMPERTURE = 0.3
 
@@ -20,7 +22,7 @@ DOCS_ROOT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs"
 SENTENCE_SIZE = 100
 
 # 匹配后单段上下文长度
-CHUNK_SIZE = 1000
+CHUNK_SIZE = 2000
 CHUNK_OVERLAP = 20
 
 # return top-k text chunk from vector store
