@@ -2,10 +2,10 @@
 Description: 
 Author: colin gao
 Date: 2023-05-05 13:32:05
-LastEditTime: 2023-05-09 16:11:11
+LastEditTime: 2023-05-09 16:14:10
 '''
 import os, json
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "sk-***"
 
 from colorama import init, Fore, Style
 
