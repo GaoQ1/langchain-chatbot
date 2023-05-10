@@ -11,9 +11,9 @@
 - [x] 支持chroma
 - [x] 支持faiss
 - [x] 支持streamlit
-- [] 支持urlloader
-- [] 支持GLM等其他LLM
-- [] 支持流式输出
-- [] 将streamlit部署
-- [] 优化前端界面
-- [] 将服务部署到小程序
+- [ ] 支持urlloader
+- [ ] 支持GLM等其他LLM
+- [ ] 支持流式输出
+- [ ] 将streamlit部署
+- [ ] 优化前端界面
+- [ ] 将服务部署到小程序
