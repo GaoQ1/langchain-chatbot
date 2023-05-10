@@ -2,7 +2,7 @@
 Description: 
 Author: colin gao
 Date: 2023-05-10 10:58:46
-LastEditTime: 2023-05-10 13:43:01
+LastEditTime: 2023-05-10 16:48:58
 '''
 from colorama import init, Fore, Style
 from langchain.document_loaders import TextLoader, DirectoryLoader
@@ -41,7 +41,7 @@ chain = load_summarize_chain(
     question_prompt=summary_prompt,
     refine_prompt=refine_prompt
 )
-result = chain({"input_documents": documents}, return_only_outputs=True)
+result = chain({"input_documents": documents[:3]}, return_only_outputs=True)
 
 print(result)
 

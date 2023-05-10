@@ -163,3 +163,4 @@ cython_debug/
 images
 vector_store
 chat_history.json
+draf.md
