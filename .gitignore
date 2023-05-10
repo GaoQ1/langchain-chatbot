@@ -162,3 +162,4 @@ cython_debug/
 .chroma
 images
 vector_store
+chat_history.json

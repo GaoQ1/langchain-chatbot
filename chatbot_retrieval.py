@@ -2,7 +2,7 @@
 Description: 
 Author: colin gao
 Date: 2023-05-05 13:32:05
-LastEditTime: 2023-05-09 18:35:20
+LastEditTime: 2023-05-10 14:58:29
 '''
 import json
 from colorama import init, Fore, Style
@@ -11,11 +11,13 @@ from langchain.document_loaders import TextLoader, DirectoryLoader
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from textsplitter import ChineseTextSplitter
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 
 from configs.config import *
 from templates import CONDENSE_PROMPT, QA_PROMPT
+from ingest import ingest
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -25,28 +27,14 @@ init()
 loader = DirectoryLoader(DOCS_ROOT_PATH, glob="**/*.txt", loader_cls=TextLoader)
 documents = loader.load()
 
-text_splitter = RecursiveCharacterTextSplitter(
+text_splitter = ChineseTextSplitter(
     chunk_size=CHUNK_SIZE,
     chunk_overlap=CHUNK_OVERLAP
 )
 documents = text_splitter.split_documents(documents)
-
 embeddings = OpenAIEmbeddings(model='text-embedding-ada-002')
 
-# 将数据存入向量存储 TODO pinecone
-if INGEST:
-    vector_store = Chroma.from_documents(
-        documents, 
-        embeddings, 
-        collection_name="my_collection", 
-        persist_directory=VS_ROOT_PATH
-    )
-else:
-    vector_store = Chroma(
-        persist_directory=VS_ROOT_PATH,
-        embedding_function=embeddings,
-        collection_name="my_collection"
-    )
+vector_store = ingest(documents, embeddings)
 
 llm_model = ChatOpenAI(
     model_name='gpt-3.5-turbo', 
