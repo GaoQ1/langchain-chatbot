@@ -2,7 +2,7 @@
 Description: 
 Author: colin gao
 Date: 2023-05-05 13:32:05
-LastEditTime: 2023-05-10 16:42:17
+LastEditTime: 2023-05-10 17:27:13
 '''
 from colorama import init, Fore, Style
 
@@ -15,7 +15,7 @@ from langchain.chains.question_answering import load_qa_chain
 
 from configs.config import *
 from templates import QA_REFINE_PROMPT, REFINE_PROMPT
-from ingest import ingest
+from utils import ingest
 
 from dotenv import load_dotenv
 load_dotenv()

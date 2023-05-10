@@ -2,7 +2,7 @@
 Description: 
 Author: colin gao
 Date: 2023-05-05 13:32:05
-LastEditTime: 2023-05-10 14:58:29
+LastEditTime: 2023-05-10 17:27:09
 '''
 import json
 from colorama import init, Fore, Style
@@ -17,7 +17,7 @@ from langchain.chat_models import ChatOpenAI
 
 from configs.config import *
 from templates import CONDENSE_PROMPT, QA_PROMPT
-from ingest import ingest
+from utils import ingest
 
 from dotenv import load_dotenv
 load_dotenv()

@@ -2,7 +2,7 @@
 Description: 
 Author: colin gao
 Date: 2023-05-09 17:39:11
-LastEditTime: 2023-05-10 15:56:57
+LastEditTime: 2023-05-10 17:17:07
 '''
 CONDENSE_PROMPT_EN = """
 Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question.
@@ -11,7 +11,7 @@ Chat History:
 {chat_history}
 
 Follow Up Input: {question}
-Standalone question in chinese:
+Standalone question:
 """
 
 CONDENSE_PROMPT = """
