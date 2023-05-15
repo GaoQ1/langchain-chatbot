@@ -2,13 +2,14 @@
 Description: 
 Author: colin gao
 Date: 2023-05-10 11:35:55
-LastEditTime: 2023-05-10 13:28:35
+LastEditTime: 2023-05-14 17:11:13
 '''
 from langchain.text_splitter import CharacterTextSplitter
 import re
 from typing import List
 from configs.config import SENTENCE_SIZE
 
+"""
 class ChineseTextSplitter(CharacterTextSplitter):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -24,3 +25,24 @@ class ChineseTextSplitter(CharacterTextSplitter):
         ls = [text[i:i + SENTENCE_SIZE] for i in range(0, len(text), SENTENCE_SIZE)]
 
         return ls
+"""
+
+class ChineseTextSplitter(CharacterTextSplitter):
+    def __init__(self, pdf: bool = False, **kwargs):
+        super().__init__(**kwargs)
+        self.pdf = pdf
+
+    def split_text(self, text: str) -> List[str]:
+        if self.pdf:
+            text = re.sub(r"\n{3,}", "\n", text)
+            text = re.sub('\s', ' ', text)
+            text = text.replace("\n\n", "")
+        sent_sep_pattern = re.compile(
+            '([﹒﹔﹖﹗．。！？]["’”」』]{0,2}|(?=["‘“「『]{1,2}|$))') 
+        sent_list = []
+        for ele in sent_sep_pattern.split(text):
+            if sent_sep_pattern.match(ele) and sent_list:
+                sent_list[-1] += ele
+            elif ele:
+                sent_list.append(ele)
+        return sent_list

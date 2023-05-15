@@ -2,7 +2,7 @@
 Description: 
 Author: colin gao
 Date: 2023-05-05 13:32:05
-LastEditTime: 2023-05-10 17:27:13
+LastEditTime: 2023-05-11 18:09:11
 '''
 from colorama import init, Fore, Style
 
@@ -12,6 +12,7 @@ from textsplitter import ChineseTextSplitter
 from langchain.prompts import PromptTemplate
 from langchain import OpenAI
 from langchain.chains.question_answering import load_qa_chain
+
 
 from configs.config import *
 from templates import QA_REFINE_PROMPT, REFINE_PROMPT
@@ -57,10 +58,10 @@ while True:
     if question.lower() == 'exit':
         break
 
-    docs = vector_store.similarity_search(question)
+    docs = vector_store.similarity_search(question, k=3)
 
     result = qa_chain.run(
-        input_documents=docs[:3], 
+        input_documents=docs, 
         question=question
     )
 

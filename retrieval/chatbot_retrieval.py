@@ -2,7 +2,7 @@
 Description: 
 Author: colin gao
 Date: 2023-05-05 13:32:05
-LastEditTime: 2023-05-10 17:27:09
+LastEditTime: 2023-05-11 17:34:09
 '''
 import json
 from colorama import init, Fore, Style
@@ -14,6 +14,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from textsplitter import ChineseTextSplitter
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
+from langchain.memory import ConversationBufferWindowMemory
 
 from configs.config import *
 from templates import CONDENSE_PROMPT, QA_PROMPT
@@ -27,7 +28,7 @@ init()
 loader = DirectoryLoader(DOCS_ROOT_PATH, glob="**/*.txt", loader_cls=TextLoader)
 documents = loader.load()
 
-text_splitter = ChineseTextSplitter(
+text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=CHUNK_SIZE,
     chunk_overlap=CHUNK_OVERLAP
 )
@@ -47,11 +48,22 @@ retriever = vector_store.as_retriever(
     question_generator_template=CONDENSE_PROMPT
 )
 
+memory = ConversationBufferWindowMemory(
+    memory_key="chat_history",
+    return_messages=True,
+    input_key="question",
+    output_key="answer"
+)
+
 qa = ConversationalRetrievalChain.from_llm(
-    llm=llm_model, retriever=retriever, return_source_documents=True)
+    llm=llm_model, 
+    retriever=retriever, 
+    return_source_documents=True,
+    max_tokens_limit=MAX_TOKENS_LIMIT
+)
+
 
 chat_history = []
-
 while True:
     question = input("Please enter your question (or type 'exit' to end): ")
     if question.lower() == 'exit':
@@ -62,8 +74,6 @@ while True:
     chat_history.append((question, result['answer']))
 
     print(f'{Fore.BLUE}{Style.BRIGHT}AI:{Fore.RESET}{Style.NORMAL} {result["answer"]}')
-
-    # Write chat history to a JSON file
+    
     with open('chat_history.json', 'w') as json_file:
         json.dump(chat_history, json_file, ensure_ascii=False, indent=4)
-

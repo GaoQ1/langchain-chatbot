@@ -5,4 +5,4 @@ streamlit:
 	streamlit run streamlit.py
 
 kill:
-	kill -9 `lsof -t -i:8502`
+	kill -9 `lsof -t -i:9000`
