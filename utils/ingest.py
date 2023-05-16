@@ -2,14 +2,14 @@
 Description: 
 Author: colin gao
 Date: 2023-05-10 14:12:34
-LastEditTime: 2023-05-10 14:34:38
+LastEditTime: 2023-05-16 17:01:24
 '''
 import os, datetime
+import pickle
 
 from configs.config import *
 from langchain.vectorstores import Chroma
 from langchain.vectorstores.faiss import FAISS
-
 
 def ingest(documents, embeddings):
     if VS_METHOD == "chroma":
@@ -36,3 +36,4 @@ def ingest(documents, embeddings):
             vector_store = FAISS.load_local(vs_path, embeddings)
 
     return vector_store
+
