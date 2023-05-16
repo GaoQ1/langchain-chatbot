@@ -2,7 +2,7 @@
 Description: 
 Author: colin gao
 Date: 2023-05-09 15:24:53
-LastEditTime: 2023-05-16 17:44:45
+LastEditTime: 2023-05-16 18:45:24
 '''
 QA_PROMPT_EN = """
 You are a helpful AI assistant. Use the following pieces of context to answer the question at the end.
@@ -16,7 +16,7 @@ Question: {question}
 Helpful:
 """
 
-QA_REFINE = """
+QA_PROMPT = """
 您是一个有用的AI助手。请使用以下上下文信息来回答最后的问题。
 如果您不知道答案，请直接说您不知道。请不要试图编造答案。
 如果问题与上下文无关，请礼貌地回应您只能回答与上下文相关的问题。
