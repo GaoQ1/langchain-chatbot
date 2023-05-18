@@ -2,19 +2,13 @@
 Description: 
 Author: colin gao
 Date: 2023-05-08 16:50:54
-LastEditTime: 2023-05-14 17:13:59
+LastEditTime: 2023-05-18 14:10:10
 '''
 import os
 
-STREAMING = False
+VS_METHOD = "faiss" # faiss/pinecone/chroma
 
-INGEST = False
-
-VS_METHOD = "chroma" # faiss/pinecone/chroma
-
-TEMPERTURE = 0.3
-
-VS_ROOT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "vector_store")
+TEMPERTURE = 0
 
 DOCS_ROOT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs")
 
@@ -26,6 +20,3 @@ SENTENCE_SIZE = 2000
 # 匹配后单段上下文长度
 CHUNK_SIZE = 1000
 CHUNK_OVERLAP = 0
-
-# return top-k text chunk from vector store
-VECTOR_SEARCH_TOP_K = 5

@@ -1,5 +1,16 @@
+'''
+Description: 
+Author: colin gao
+Date: 2023-05-17 15:54:12
+LastEditTime: 2023-05-17 16:43:13
+'''
 """Schemas for the chat app."""
 from pydantic import BaseModel, validator
+
+
+class ChatItem(BaseModel):
+    text: str
+    history: list=[]
 
 
 class ChatResponse(BaseModel):

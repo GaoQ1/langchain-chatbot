@@ -1,0 +1,12 @@
+version: "3.4"
+
+services:
+  chat:
+    container_name: chat
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 9000:9000
+    volumes:
+      - .:/app

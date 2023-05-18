@@ -162,5 +162,8 @@ cython_debug/
 .chroma
 images
 vector_store
-chat_history.json
 draf.md
+temp
+docs
+question.md
+logs
