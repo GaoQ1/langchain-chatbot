@@ -1,0 +1,13 @@
+version: '2'
+services:
+  langchain-chatbot:
+    hostname: langchain-chatbot
+    container_name: langchain-chatbot
+    restart: always
+    image: langchain-chatbot
+    privileged: true
+    ipc: host
+    tty: true
+    # working_dir: /workspace
+    ports:
+      - '4080:8080'
