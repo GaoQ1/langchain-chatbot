@@ -2,14 +2,14 @@
  * @Description: 
  * @Author: colin gao
  * @Date: 2023-05-07 06:46:52
- * @LastEditTime: 2023-05-20 19:44:31
+ * @LastEditTime: 2023-05-20 20:38:06
 -->
 
 # langchain-chatbot
 基于langchain框架，一个检索式和生成式的chatbot。
 
 ## langchain过河记系列文章
-- [langchain过河记（一）](https://www.jianshu.com/p/233d513a3d27?v=1684583045711)
+- [langchain过河记（一）](https://juejin.cn/post/7235117005737377849)
 
 ## Running by command
 ```
