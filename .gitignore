@@ -167,3 +167,5 @@ temp
 docs
 question.md
 logs
+chat_history.json
+clash_config.yaml

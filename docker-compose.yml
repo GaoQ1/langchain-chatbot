@@ -1,12 +1,13 @@
-version: "3.4"
-
+version: '2'
 services:
-  chat:
-    container_name: chat
-    build:
-      context: .
-      dockerfile: Dockerfile
+  langchain-chatbot:
+    hostname: langchain-chatbot
+    container_name: langchain-chatbot
+    restart: always
+    image: langchain-chatbot
+    privileged: true
+    ipc: host
+    tty: true
+    # working_dir: /workspace
     ports:
-      - 9000:9000
-    volumes:
-      - .:/app
+      - '4080:8080'
