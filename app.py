@@ -2,7 +2,7 @@
 Description: 
 Author: colin gao
 Date: 2023-05-17 15:54:12
-LastEditTime: 2023-05-18 18:37:20
+LastEditTime: 2023-05-20 17:31:42
 '''
 import pickle
 from pathlib import Path
@@ -13,7 +13,7 @@ from fastapi import FastAPI
 from langchain.vectorstores import VectorStore
 from schema import ChatItem
 
-from chat_agent import get_chain
+from chatbot import get_chain
 from utils import logger
 
 from dotenv import load_dotenv

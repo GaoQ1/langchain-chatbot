@@ -164,7 +164,8 @@ images
 vector_store
 draf.md
 temp
-docs
+docs/*
+!docs/周易
 question.md
 logs
 chat_history.json

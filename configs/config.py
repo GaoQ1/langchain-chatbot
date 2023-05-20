@@ -2,13 +2,13 @@
 Description: 
 Author: colin gao
 Date: 2023-05-08 16:50:54
-LastEditTime: 2023-05-18 14:10:10
+LastEditTime: 2023-05-20 16:38:49
 '''
 import os
 
 VS_METHOD = "faiss" # faiss/pinecone/chroma
 
-TEMPERTURE = 0
+TEMPERTURE = 0.5
 
 DOCS_ROOT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs")
 
