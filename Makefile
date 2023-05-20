@@ -1,8 +1,5 @@
 chatbot:
-	python chatbot.py
-
-streamlit:
-	streamlit run streamlit.py
+	python app.py
 
 kill:
-	kill -9 `lsof -t -i:8502`
+	kill -9 `lsof -t -i:9000`

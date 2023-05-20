@@ -2,37 +2,36 @@
 Description: 
 Author: colin gao
 Date: 2023-05-10 14:12:34
-LastEditTime: 2023-05-10 14:34:38
+LastEditTime: 2023-05-16 15:04:47
 '''
-import os, datetime
+import pickle
 
-from configs.config import *
-from langchain.vectorstores import Chroma
+from langchain.document_loaders import TextLoader, DirectoryLoader
+from langchain.embeddings.openai import OpenAIEmbeddings
+from textsplitter import ChineseTextSplitter
 from langchain.vectorstores.faiss import FAISS
+from configs.config import *
 
+from dotenv import load_dotenv
+load_dotenv()
 
-def ingest(documents, embeddings):
-    if VS_METHOD == "chroma":
-        if INGEST:
-            vector_store = Chroma.from_documents(
-                documents, 
-                embeddings, 
-                collection_name="my_collection_chroma",
-                persist_directory=VS_ROOT_PATH
-            )
-        else:
-            vector_store = Chroma(
-                persist_directory=VS_ROOT_PATH,
-                embedding_function=embeddings,
-                collection_name="my_collection_chroma"
-            )
+def ingest():
+    loader = DirectoryLoader(DOCS_ROOT_PATH, glob="**/*.txt", loader_cls=TextLoader)
+    documents = loader.load()
 
-    elif VS_METHOD == "faiss":
-        vs_path = os.path.join(VS_ROOT_PATH, "my_collection_faiss")
-        if INGEST:
-            vector_store = FAISS.from_documents(documents, embeddings)
-            vector_store.save_local(vs_path)
-        else:
-            vector_store = FAISS.load_local(vs_path, embeddings)
+    text_splitter = ChineseTextSplitter(
+        chunk_size=CHUNK_SIZE,
+        chunk_overlap=CHUNK_OVERLAP
+    )
 
-    return vector_store
+    documents = text_splitter.split_documents(documents)
+    embeddings = OpenAIEmbeddings(model='text-embedding-ada-002')
+
+    vector_store = FAISS.from_documents(documents, embeddings)
+
+    # Save vectorstore
+    with open("vectorstore.pkl", "wb") as f:
+        pickle.dump(vector_store, f)
+
+if __name__ == "__main__":
+    ingest()

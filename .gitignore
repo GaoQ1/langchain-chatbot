@@ -162,5 +162,11 @@ cython_debug/
 .chroma
 images
 vector_store
-chat_history.json
 draf.md
+temp
+docs/*
+!docs/周易
+question.md
+logs
+chat_history.json
+clash_config.yaml

@@ -1,0 +1,3 @@
+# 务必指定external-ui
+external-ui: /opt/clash/ui
+# 否则UI服务无法启动
