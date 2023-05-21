@@ -2,18 +2,19 @@
 Description: 
 Author: colin gao
 Date: 2023-05-17 15:54:12
-LastEditTime: 2023-05-20 17:31:42
+LastEditTime: 2023-05-21 14:21:19
 '''
 import pickle
 from pathlib import Path
 from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from utils import StreamingLLMCallbackHandler, QuestionGenCallbackHandler
 
 from langchain.vectorstores import VectorStore
-from schema import ChatItem
+from schema import ChatItem, ChatResponse
 
-from chatbot import get_chain
+from chatbot import get_chain, get_ws_chain
 from utils import logger
 
 from dotenv import load_dotenv
@@ -52,6 +53,46 @@ def chat(item: ChatItem):
     return {
         "result": result
     }
+
+
+@app.websocket("/chat_ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+
+    question_handler = QuestionGenCallbackHandler(websocket)
+    stream_handler = StreamingLLMCallbackHandler(websocket)
+    chat_history = []
+    qa_chain = get_ws_chain(vectorstore, question_handler, stream_handler)
+
+    while True:
+        try:
+            # Receive and send back the client message
+            question = await websocket.receive_text()
+            resp = ChatResponse(sender="you", message=question, type="stream")
+            await websocket.send_json(resp.dict())
+
+            # Construct a response
+            start_resp = ChatResponse(sender="bot", message="", type="start")
+            await websocket.send_json(start_resp.dict())
+
+            result = await qa_chain.acall(
+                {"question": question, "chat_history": chat_history}
+            )
+            chat_history.append((question, result["answer"]))
+
+            end_resp = ChatResponse(sender="bot", message="", type="end")
+            await websocket.send_json(end_resp.dict())
+        except WebSocketDisconnect:
+            logger.info("websocket disconnect")
+            break
+        except Exception as e:
+            logger.error(e)
+            resp = ChatResponse(
+                sender="bot",
+                message="Sorry, something went wrong. Try again.",
+                type="error",
+            )
+            await websocket.send_json(resp.dict())
 
 
 if __name__ == "__main__":
