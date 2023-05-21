@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: colin gao
  * @Date: 2023-05-07 06:46:52
- * @LastEditTime: 2023-05-20 22:52:10
+ * @LastEditTime: 2023-05-21 08:13:10
 -->
 
 # langchain-chatbot
@@ -11,6 +11,7 @@
 ## langchain过河记系列文章
 - [langchain过河记（一）](https://zhuanlan.zhihu.com/p/630925973)
 - [langchain过河记（二）](https://zhuanlan.zhihu.com/p/630930843)
+- [langchain过河记（三）](https://zhuanlan.zhihu.com/p/630971903)
 
 ## Running by command
 ```
