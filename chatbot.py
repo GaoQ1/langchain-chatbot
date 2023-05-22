@@ -2,7 +2,7 @@
 Description: 
 Author: colin gao
 Date: 2023-05-14 17:16:12
-LastEditTime: 2023-05-21 14:20:14
+LastEditTime: 2023-05-21 15:03:05
 '''
 from langchain.agents import Tool, AgentType, initialize_agent
 from langchain.memory import ConversationBufferWindowMemory
@@ -84,7 +84,6 @@ def get_chain(vectorstore: VectorStore):
 
     当回答问题时，AI占卜助手必须使用以下语言：中文。
     """
-
 
     new_prompt = agent_chain.agent.create_prompt(
         system_message = sys_msg,

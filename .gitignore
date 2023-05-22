@@ -170,3 +170,4 @@ question.md
 logs
 chat_history.json
 clash_config.yaml
+.DS_Store
