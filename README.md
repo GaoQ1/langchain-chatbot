@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: colin gao
  * @Date: 2023-05-07 06:46:52
- * @LastEditTime: 2023-05-21 14:54:39
+ * @LastEditTime: 2023-05-23 17:02:36
 -->
 
 # langchain-chatbot
@@ -65,3 +65,4 @@ docker-compose up -d
 - [langchain过河记（一）](https://zhuanlan.zhihu.com/p/630925973)
 - [langchain过河记（二）](https://zhuanlan.zhihu.com/p/630930843)
 - [langchain过河记（三）](https://zhuanlan.zhihu.com/p/630971903)
+- [langchain过河记（四）](https://zhuanlan.zhihu.com/p/631600368)
