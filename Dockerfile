@@ -9,6 +9,7 @@ RUN rm -rf  /etc/apt/sources.list.d/  && apt update
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     zsh \
+    vim \
     curl \
     wget \
     unzip \
@@ -22,7 +23,7 @@ RUN dpkg-reconfigure locales
 CMD ["supervisord", "-n"]
 
 
-FROM Builder AS conda
+FROM builder AS conda
 ENV MINICONDA_VERSION 3
 ENV CONDA_FORGE https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge
 RUN chsh -s `which zsh`
@@ -36,25 +37,25 @@ RUN conda install mamba -n base -c ${CONDA_FORGE}
 RUN ln /opt/conda/bin/mamba /usr/local/bin/mamba && mamba init zsh
 
 
-FROM Builder AS python
-# ENV WORKDIR /app
-# WORKDIR ${WORKDIR}
-# ADD environment.yml /environment.yml
-# RUN mamba update -n base -c ${CONDA_FORGE} conda -y && mamba env create -f /environment.yml -c ${CONDA_FORGE} && rm -rf /root/.cache
+FROM conda AS python
+ENV WORKDIR /app
+WORKDIR ${WORKDIR}
+ADD environment.yml /environment.yml
+RUN mamba clean --all -y && mamba update -n base -c ${CONDA_FORGE} conda mamba -y && mamba env create -f /environment.yml && rm -rf /root/.cache
 
-# RUN echo "\
-# [program:be]\n\
-# directory=/app\n\
-# command=/opt/conda/envs/py38/bin/gunicorn server:app --workers 1 --worker-class=utils.r_uvicorn_worker.RestartableUvicornWorker  --bind 0.0.0.0:8080 --reload\n\
-# autorestart=true\n\
-# startretries=100\n\
-# redirect_stderr=true\n\
-# stdout_logfile=/var/log/be.log\n\
-# stdout_logfile_maxbytes=50MB\n\
-# environment=PYTHONUNBUFFERED=1, PYTHONIOENCODING=utf-8\n\
-# " > /etc/supervisor/conf.d/be.conf
+RUN echo "\
+[program:be]\n\
+directory=/app\n\
+command=/opt/conda/envs/py310/bin/python /app/app.py\n\
+autorestart=true\n\
+startretries=100\n\
+redirect_stderr=true\n\
+stdout_logfile=/var/log/be.log\n\
+stdout_logfile_maxbytes=50MB\n\
+environment=PYTHONUNBUFFERED=1, PYTHONIOENCODING=utf-8\n\
+" > /etc/supervisor/conf.d/be.conf
 
-FROM Builder AS clash
+FROM python AS clash
 WORKDIR /opt/clash
 RUN mkdir -p /root/.config/clash && \
     wget -O /root/.config/clash/Country.mmdb https://download.fastgit.ixmu.net/Dreamacro/maxmind-geoip/releases/latest/download/Country.mmdb

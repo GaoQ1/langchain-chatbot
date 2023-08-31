@@ -44,3 +44,23 @@ def count_tokens(chain, query):
         logger.info(f'Spent a total of {cb.total_tokens} tokens')
 
     return result
+
+import requests
+def test_youtube_access(in_logger=''):
+    logger = print if not in_logger else in_logger.info
+    url = "https://www.youtube.com"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+    }
+
+    try:
+        response = requests.get(url, headers=headers, timeout=5)
+        if response.status_code == 200:
+            logger("成功访问YouTube")
+            return True
+        else:
+            logger(f"访问YouTube失败，状态码：{response.status_code}")
+            return False
+    except requests.exceptions.RequestException as e:
+        logger(f"访问YouTube时出现异常: {e}")
+        return False

@@ -10,11 +10,11 @@ from fastapi import FastAPI
 from schema import ChatItem
 from chatbot import get_chain
 
-from utils import logger
+from utils import logger, test_youtube_access
 
 from dotenv import load_dotenv
 load_dotenv()
-
+test_youtube_access()
 app = FastAPI()
 
 app.add_middleware(CORSMiddleware,
@@ -36,6 +36,9 @@ def chat(item: ChatItem):
         "result": result['response']
     }
 
+@app.get("/ping")
+async def ping():
+    return "pong!!"
 
 if __name__ == "__main__":
     import uvicorn

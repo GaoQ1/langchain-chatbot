@@ -1,0 +1,31 @@
+name: py310
+channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ # Anocanda清华镜像
+  - defaults
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+dependencies:
+  - python=3.10
+  - ipython
+  - pip
+  - pip:
+      - openai
+      - fastapi
+      - black
+      - isort
+      - websockets
+      - pydantic
+      - langchain
+      - uvicorn
+      - jinja2
+      - faiss-cpu
+      - bs4
+      - unstructured
+      - libmagic
+      - colorama==0.4.6
+      - pinecone-client==2.2.1
+      - streamlit==1.22.0
+      - pymongo
+      - loguru
+      - python-dotenv
+      - -i https://mirror.baidu.com/pypi/simple
+prefix: /opt/conda/envs/py310

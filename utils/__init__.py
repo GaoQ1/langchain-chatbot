@@ -6,4 +6,4 @@ LastEditTime: 2023-05-26 19:24:25
 '''
 from .log import logger
 from .callback import StreamingLLMCallbackHandler, QuestionGenCallbackHandler
-from .tools import load_tools
+from .tools import load_tools, test_youtube_access
