@@ -66,3 +66,6 @@ docker-compose up -d
 - [langchain过河记（二）](https://zhuanlan.zhihu.com/p/630930843)
 - [langchain过河记（三）](https://zhuanlan.zhihu.com/p/630971903)
 - [langchain过河记（四）](https://zhuanlan.zhihu.com/p/631600368)
+
+## external link
+[liveportraitweb](https://www.liveportraitweb.com/)
