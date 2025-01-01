@@ -71,3 +71,4 @@ docker-compose up -d
 [liveportraitweb](https://www.liveportraitweb.com/)
 [novelling](https://www.novelling.com/)
 [Rewritifyai](https://www.rewritifyai.com/)
+[MMAudio](https://www.mmaudio.pro/)
