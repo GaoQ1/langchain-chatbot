@@ -75,3 +75,4 @@ docker-compose up -d
 [Creator Viral Video](https://www.creatorviralvideo.com/)
 [Transpixar](https://www.transpixar.pro/)
 [Rednote](https://www.rednote.pro/)
+[RednoteApp](https://www.rednoteapp.pro/)
