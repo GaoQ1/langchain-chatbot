@@ -74,3 +74,4 @@ docker-compose up -d
 [MMAudio](https://www.mmaudio.pro/)
 [Creator Viral Video](https://www.creatorviralvideo.com/)
 [Transpixar](https://www.transpixar.pro/)
+[Rednote](https://www.rednote.pro/)
